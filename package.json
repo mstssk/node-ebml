@@ -34,7 +34,6 @@
     "format"
   ],
   "dependencies": {
-    "buffers": "^0.1.1",
     "debug": "~4.1.0"
   },
   "devDependencies": {

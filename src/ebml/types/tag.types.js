@@ -1,6 +1,6 @@
 // @flow
 
-import type { EBMLSchema } from './schema.types';
+import type { EBMLSchema } from "./schema.types";
 
 export type TagMeta = {
   data: Buffer,

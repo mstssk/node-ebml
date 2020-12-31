@@ -1,8 +1,8 @@
-import { Transform } from 'stream';
-import tools from './tools';
-import schema from './schema';
+import { Transform } from "stream";
+import tools from "./tools";
+import schema from "./schema";
 
-const debug = require('debug')('ebml:decoder');
+const debug = require("debug")("ebml:decoder");
 
 const STATE_TAG = 1;
 const STATE_SIZE = 2;
@@ -119,8 +119,8 @@ export default class EbmlDecoder extends Transform {
     }
     return {
       type: null,
-      name: 'unknown',
-      description: '',
+      name: "unknown",
+      description: "",
       level: -1,
       minver: -1,
       multiple: false,
@@ -131,13 +131,13 @@ export default class EbmlDecoder extends Transform {
   readTag() {
     /* istanbul ignore if */
     if (debug.enabled) {
-      debug('parsing tag');
+      debug("parsing tag");
     }
 
     if (this.cursor >= this.buffer.length) {
       /* istanbul ignore if */
       if (debug.enabled) {
-        debug('waiting for more data');
+        debug("waiting for more data");
       }
       return false;
     }
@@ -148,7 +148,7 @@ export default class EbmlDecoder extends Transform {
     if (tag == null) {
       /* istanbul ignore if */
       if (debug.enabled) {
-        debug('waiting for more data');
+        debug("waiting for more data");
       }
 
       return false;
@@ -193,7 +193,7 @@ export default class EbmlDecoder extends Transform {
     if (this.cursor >= this.buffer.length) {
       /* istanbul ignore if */
       if (debug.enabled) {
-        debug('waiting for more data');
+        debug("waiting for more data");
       }
 
       return false;
@@ -204,7 +204,7 @@ export default class EbmlDecoder extends Transform {
     if (size == null) {
       /* istanbul ignore if */
       if (debug.enabled) {
-        debug('waiting for more data');
+        debug("waiting for more data");
       }
 
       return false;
@@ -239,12 +239,12 @@ export default class EbmlDecoder extends Transform {
       debug(`parsing content for tag: ${tagStr}`);
     }
 
-    if (type === 'm') {
+    if (type === "m") {
       /* istanbul ignore if */
       if (debug.enabled) {
-        debug('content should be tags');
+        debug("content should be tags");
       }
-      this.push(['start', { tagStr, type, dataSize, ...rest }]);
+      this.push(["start", { tagStr, type, dataSize, ...rest }]);
       this.state = STATE_TAG;
 
       return true;
@@ -255,7 +255,7 @@ export default class EbmlDecoder extends Transform {
       if (debug.enabled) {
         debug(`got: ${this.buffer.length}`);
         debug(`need: ${this.cursor + dataSize}`);
-        debug('waiting for more data');
+        debug("waiting for more data");
       }
 
       return false;
@@ -270,7 +270,7 @@ export default class EbmlDecoder extends Transform {
     this.tagStack.pop(); // remove the object from the stack
 
     this.push([
-      'tag',
+      "tag",
       tools.readDataFromTag(
         { tagStr, type, dataSize, ...rest },
         Buffer.from(data),
@@ -282,13 +282,13 @@ export default class EbmlDecoder extends Transform {
       if (this.total < topEle.end) {
         break;
       }
-      this.push(['end', topEle]);
+      this.push(["end", topEle]);
       this.tagStack.pop();
     }
 
     /* istanbul ignore if */
     if (debug.enabled) {
-      debug(`read data: ${data.toString('hex')}`);
+      debug(`read data: ${data.toString("hex")}`);
     }
 
     return true;

@@ -22,6 +22,7 @@ module.exports = (api) => {
         },
         modules: api.env("test") ? "commonjs" : false,
         useBuiltIns: "usage",
+        corejs: 3,
       },
     ],
     "@babel/flow",

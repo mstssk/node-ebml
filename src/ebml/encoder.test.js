@@ -100,7 +100,8 @@ describe('EBML', () => {
         );
         encoder.uncork();
         encoder.flush();
-        assert.notStrictEqual(encoder.buffer instanceof Buffer);
+        // assert.notStrictEqual(encoder.buffer instanceof Buffer);
+        assert.ok(encoder.buffer instanceof Buffer); // なんかこのテストおかしい。assert.notStrictEqualってなんやねん。
       });
     });
     describe('::getSchemaInfo', () => {

@@ -91,6 +91,6 @@ export default [
         name: 'EBML',
       },
     ],
-    plugins: [...plugins, terser({ sourcemap })],
+    plugins: [...plugins, terser()],
   },
 ];

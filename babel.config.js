@@ -1,4 +1,4 @@
-const LTS = 6; // The current oldest LTS supported by Node
+const LTS = 12; // The current oldest LTS supported by Node
 
 module.exports = (api) => {
   api.cache.using(() => process.env.NODE_ENV === "development");

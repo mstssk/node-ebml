@@ -1,12 +1,12 @@
-import { Transform } from 'stream';
-import schema from './schema';
-import tools from './tools';
+import { Transform } from "stream";
+import schema from "./schema";
+import tools from "./tools";
 
-const debug = require('debug')('ebml:encoder');
+const debug = require("debug")("ebml:encoder");
 
 function encodeTag(tagId, tagData, end) {
   if (end === -1) {
-    return Array.from([tagId, Buffer.from('01ffffffffffffff', 'hex'), tagData]);
+    return Array.from([tagId, Buffer.from("01ffffffffffffff", "hex"), tagData]);
   }
   return Array.from([tagId, tools.writeVint(tagData.length), tagData]);
 }
@@ -80,13 +80,13 @@ export default class EbmlEncoder extends Transform {
     }
 
     switch (tag) {
-      case 'start':
+      case "start":
         this.startTag(name, { ...rest });
         break;
-      case 'tag':
+      case "tag":
         this.writeTag(name, data);
         break;
-      case 'end':
+      case "end":
         this.endTag();
         break;
       default:
@@ -104,7 +104,7 @@ export default class EbmlEncoder extends Transform {
     if (!this.buffer || this.corked) {
       /* istanbul ignore if */
       if (debug.enabled) {
-        debug('no buffer/nothing pending');
+        debug("no buffer/nothing pending");
       }
       return done();
     }
@@ -112,7 +112,7 @@ export default class EbmlEncoder extends Transform {
     if (this.buffer.byteLength === 0) {
       /* istanbul ignore if */
       if (debug.enabled) {
-        debug('empty buffer');
+        debug("empty buffer");
       }
       return done();
     }
@@ -153,7 +153,7 @@ export default class EbmlEncoder extends Transform {
    */
   static getSchemaInfo(tagName) {
     const tagId = Array.from(schema.keys()).find(
-      str => schema.get(str).name === tagName,
+      (str) => schema.get(str).name === tagName,
     );
     if (tagId) {
       return tagId;
@@ -216,7 +216,7 @@ export default class EbmlEncoder extends Transform {
       children: [],
       data: { buffer: Buffer.from([]) },
     };
-    const childTagDataBuffers = tag.children.map(child => child.data);
+    const childTagDataBuffers = tag.children.map((child) => child.data);
     tag.data = encodeTag(tag.id, Array.from(childTagDataBuffers), tag.end);
     if (this.stack.length < 1) {
       this.bufferAndFlush(tag.data.buffer);

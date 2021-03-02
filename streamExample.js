@@ -1,4 +1,3 @@
-/* eslint no-console:off */
 const { Decoder } = require("./lib/ebml.js");
 
 const ebmlDecoder = new Decoder();

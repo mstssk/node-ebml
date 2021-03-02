@@ -13,8 +13,6 @@ __test__/
 .editorconfig
 .env
 .env.example
-.eslintignore
-.eslintrc.js
 .flowconfig
 .nyc_output/
 .prettierrc

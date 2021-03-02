@@ -14,7 +14,7 @@ describe("EBML", () => {
         expect(
           chunk.toString("hex"),
           "to be",
-          Buffer.from(expected).toString("hex"),
+          Buffer.from(expected).toString("hex")
         );
         encoder.on("finish", done);
         done();
@@ -37,7 +37,7 @@ describe("EBML", () => {
     it("should write a tag with a single child", (done) => {
       const encoder = createEncoder(
         [0x1a, 0x45, 0xdf, 0xa3, 0x84, 0x42, 0x86, 0x81, 0x00],
-        done,
+        done
       );
       encoder.write(["start", { name: "EBML" }]);
       encoder.write([
@@ -74,7 +74,7 @@ describe("EBML", () => {
         // );
         assert.ok(
           encoder.buffer,
-          Buffer.from([0x1a, 0x45, 0xdf, 0xa3, 0x84, 0x42, 0x86, 0x81, 0x00]),
+          Buffer.from([0x1a, 0x45, 0xdf, 0xa3, 0x84, 0x42, 0x86, 0x81, 0x00])
         );
       });
       it("should not block flushing when uncorked", () => {
@@ -96,7 +96,7 @@ describe("EBML", () => {
         // );
         assert.ok(
           encoder.buffer,
-          Buffer.from([0x1a, 0x45, 0xdf, 0xa3, 0x84, 0x42, 0x86, 0x81, 0x00]),
+          Buffer.from([0x1a, 0x45, 0xdf, 0xa3, 0x84, 0x42, 0x86, 0x81, 0x00])
         );
         encoder.uncork();
         encoder.flush();
@@ -127,7 +127,7 @@ describe("EBML", () => {
             encoder.writeTag("404NotFound");
           },
           "to throw",
-          /No schema entry found/,
+          /No schema entry found/
         );
       });
     });
@@ -142,7 +142,7 @@ describe("EBML", () => {
             encoder.startTag("404NotFound", { end: -1 });
           },
           "to throw",
-          /No schema entry found/,
+          /No schema entry found/
         );
       });
       it("creates a valid tag when presented", () => {
@@ -170,7 +170,7 @@ describe("EBML", () => {
         encoder.startTag("ChapterTimeStart", { end: 0x80 });
         expect(encoder.stack[0].children, "not to be empty").and(
           "to have length",
-          1,
+          1
         );
       });
     });
@@ -182,7 +182,6 @@ describe("EBML", () => {
       });
     });
     describe("#_bufferAndFlush", () => {
-      /* eslint-disable no-underscore-dangle */
       let encoder;
       beforeEach(() => {
         encoder = new Encoder();
@@ -198,7 +197,6 @@ describe("EBML", () => {
         encoder._bufferAndFlush(Buffer.from([0x42, 0x86, 0x81, 0x01]));
         expect(encoder.buffer, "to be null");
       });
-      /* eslint-enable no-underscore-dangle */
     });
   });
 });

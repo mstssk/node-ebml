@@ -1,4 +1,3 @@
-/* eslint no-console:off */
 const fs = require("fs");
 const { Decoder } = require("./lib/ebml.js");
 

@@ -230,7 +230,7 @@ describe("EBML", () => {
                 done();
               }
             }
-          },
+          }
         );
         decoder.on("finish", () => {
           expect.fail("hit end of file without finding tag");

@@ -157,7 +157,7 @@ export default class EbmlDecoder extends Transform {
     const tagStr = tools.readHexString(
       this.buffer,
       this.cursor,
-      this.cursor + tag.length,
+      this.cursor + tag.length
     );
     const tagNum = Number.parseInt(tagStr, 16);
     this.cursor += tag.length;
@@ -273,7 +273,7 @@ export default class EbmlDecoder extends Transform {
       "tag",
       tools.readDataFromTag(
         { tagStr, type, dataSize, ...rest },
-        Buffer.from(data),
+        Buffer.from(data)
       ),
     ]);
 

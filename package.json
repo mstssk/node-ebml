@@ -15,8 +15,8 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "echo TODO",
-    "fmt": "echo TODO",
+    "lint": "prettier --check ./",
+    "fmt": "prettier --write ./",
     "build": "rollup --config",
     "prepare": "npm run build",
     "prepublishOnly": "NODE_ENV=production npm run build"

@@ -153,7 +153,7 @@ export default class EbmlEncoder extends Transform {
    */
   static getSchemaInfo(tagName) {
     const tagId = Array.from(schema.keys()).find(
-      (str) => schema.get(str).name === tagName,
+      (str) => schema.get(str).name === tagName
     );
     if (tagId) {
       return tagId;

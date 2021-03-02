@@ -1,4 +1,3 @@
-import forEach from "lodash.foreach";
 import range from "lodash.range";
 import unexpected from "unexpected";
 import unexpectedDate from "unexpected-date";
@@ -17,7 +16,7 @@ describe("EBML", () => {
       }
 
       it("should read the correct value for all 1 byte integers", () => {
-        forEach(range(0x80), (i) => readVint(Buffer.from([i | 0x80]), i));
+        range(0x80).forEach((i) => readVint(Buffer.from([i | 0x80]), i));
       });
       it("should read the correct value for 1 byte int with non-zero start", () => {
         const b = Buffer.from([0x00, 0x81]);
@@ -26,20 +25,20 @@ describe("EBML", () => {
         expect(vint.length, "to be", 1);
       });
       it("should read the correct value for all 2 byte integers", () => {
-        forEach(range(0x40), (i) =>
-          forEach(range(0xff), (j) => {
+        range(0x40).forEach((i) => {
+          range(0xff).forEach((j) => {
             readVint(Buffer.from([i | 0x40, j]), (i << 8) + j);
-          }),
-        );
+          });
+        });
       });
       it("should read the correct value for all 3 byte integers", () => {
-        forEach(range(0, 0x20, 1), (i) =>
-          forEach(range(0, 0xff, 2), (j) =>
-            forEach(range(0, 0xff, 3), (k) => {
+        range(0, 0x20, 1).forEach((i) => {
+          range(0, 0xff, 2).forEach((j) => {
+            range(0, 0xff, 3).forEach((k) => {
               readVint(Buffer.from([i | 0x20, j, k]), (i << 16) + (j << 8) + k);
-            }),
-          ),
-        );
+            });
+          });
+        });
       });
       // not brute forcing any more bytes, takes sooo long
       it("should read the correct value for 4 byte int min/max values", () => {
@@ -130,9 +129,9 @@ describe("EBML", () => {
         );
       });
       it("should write all 1 byte integers", () => {
-        forEach(range(0, 0x80 - 1), (i) =>
-          writeVint(i, Buffer.from([i | 0x80])),
-        );
+        range(0, 0x80 - 1).forEach((i) => {
+          writeVint(i, Buffer.from([i | 0x80]));
+        });
       });
       it("should write 2 byte int min/max values", () => {
         writeVint(2 ** 7 - 1, Buffer.from([0x40, 0x7f]));

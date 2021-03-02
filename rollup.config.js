@@ -31,7 +31,7 @@ const sourcemap = process.env.SOURCE_MAPS || true;
 
 export default [
   {
-    input: "./src/ebml/index.js",
+    input: "./src/index.js",
     output: [
       {
         file: "lib/ebml.js",
@@ -65,7 +65,7 @@ export default [
     plugins,
   },
   {
-    input: "./src/ebml/index.js",
+    input: "./src/index.js",
     output: [
       {
         file: "lib/ebml.min.js",

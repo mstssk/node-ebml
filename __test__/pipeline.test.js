@@ -1,5 +1,5 @@
 import unexpected from "unexpected";
-import { Decoder, Encoder } from "../src/ebml";
+import { Decoder, Encoder } from "../src";
 
 const expect = unexpected.clone();
 

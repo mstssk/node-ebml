@@ -1,6 +1,6 @@
 import fs from "fs";
 import unexpected from "unexpected";
-import { Decoder } from "../src/ebml";
+import { Decoder } from "../src";
 
 process.setMaxListeners(Infinity);
 

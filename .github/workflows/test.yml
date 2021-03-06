@@ -18,6 +18,7 @@ jobs:
       - run: npm cit
       - uses: wearerequired/lint-action@v1
         with:
+          auto_fix: true
           prettier: true
       - run: node example.js
       - run: node streamExample.js
